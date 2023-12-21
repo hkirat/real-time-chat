@@ -11,7 +11,7 @@ const App = () => {
                     <ChatBubble />
                 </div>
                 <div className="border border-blue-950 rounded-md h-full"></div>
-                <div className="w-full h-full">test</div>
+                <div className="w-full h-full"></div>
             </div>
         </>
     );
