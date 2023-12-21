@@ -28,6 +28,9 @@ export class UserManager {
       name,
       conn: socket,
     });
+    socket.on("close", (reasonCode, description) => {
+      this.removeUser(roomId, userId);
+    });
   }
 
   removeUser(roomId: string, userId: string) {
