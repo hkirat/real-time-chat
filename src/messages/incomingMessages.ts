@@ -20,7 +20,7 @@ export type IncomingMessage = {
 
 export const InitMessage = z.object({
     name: z.string(),
-    userId: z.string(),
+    userId: z.string(), 
     roomId: z.string(),
 })
 

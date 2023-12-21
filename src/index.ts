@@ -43,11 +43,10 @@ wsServer.on('request', function(request) {
     var connection = request.accept('echo-protocol', request.origin);
     console.log((new Date()) + ' Connection accepted.');
     connection.on('message', function(message) {
-        console.log(message);
+
         // Todo add rate limitting logic here 
         if (message.type === 'utf8') {
             try {
-                console.log("indie with message" + message.utf8Data)
                 messageHandler(connection, JSON.parse(message.utf8Data));
             } catch(e) {
 
@@ -91,9 +90,11 @@ function messageHandler(ws: connection, message: IncomingMessage) {
     if (message.type === SupportedMessage.UpvoteMessage) {
         const payload = message.payload;
         const chat = store.upvote(payload.userId, payload.roomId, payload.chatId);
+        console.log("inside upvote")
         if (!chat) {
             return;
         }
+        console.log("inside upvote 2")
 
         const outgoingPayload: OutgoingMessage= {
             type: OutgoingSupportedMessages.UpdateChat,
@@ -104,6 +105,7 @@ function messageHandler(ws: connection, message: IncomingMessage) {
             }
         }
 
+        console.log("inside upvote 3")
         userManager.broadcast(payload.roomId, payload.userId, outgoingPayload);
     }
 }
