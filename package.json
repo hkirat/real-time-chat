@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/hkirat/real-time-chat/issues"
   },
-  "homepage": "https://github.com/hkirat/real-time-chat#readme"
+  "homepage": "https://github.com/hkirat/real-time-chat#readme",
+  "dependencies": {
+    "@types/websocket": "^1.0.10",
+    "websocket": "^1.0.34"
+  }
 }
