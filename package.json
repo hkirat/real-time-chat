@@ -4,7 +4,6 @@
   "description": "Build a simple chat applications using raw websockets in Node.js that supports the following features -",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "prettier --write \"**/*.{js,json,ts,yml,yaml}\"&&prettier --check \"**/*.{js,json,ts,yml,yaml}\"",
     "dev":"tsx watch src/index.ts"
   },
