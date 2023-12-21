@@ -1,0 +1,64 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "text": "What is the event-driven architecture in Node.js?",
+      "upvotes": 15,
+      "downvotes": 2
+    },
+    {
+      "id": 2,
+      "text": "Explain the difference between callbacks and Promises in Node.js.",
+      "upvotes": 10,
+      "downvotes": 1
+    },
+    {
+      "id": 3,
+      "text": "How does Node.js handle asynchronous operations?",
+      "upvotes": 12,
+      "downvotes": 3
+    },
+    {
+      "id": 4,
+      "text": "What is the purpose of the 'package.json' file in a Node.js project?",
+      "upvotes": 8,
+      "downvotes": 0
+    },
+    {
+      "id": 5,
+      "text": "Explain the role of npm in Node.js development.",
+      "upvotes": 14,
+      "downvotes": 5
+    },
+    {
+      "id": 6,
+      "text": "What is middleware in the context of Express.js?",
+      "upvotes": 9,
+      "downvotes": 2
+    },
+    {
+      "id": 7,
+      "text": "How does Node.js handle blocking and non-blocking I/O?",
+      "upvotes": 11,
+      "downvotes": 4
+    },
+    {
+      "id": 8,
+      "text": "What is the purpose of the 'require' function in Node.js?",
+      "upvotes": 7,
+      "downvotes": 1
+    },
+    {
+      "id": 9,
+      "text": "Explain the concept of streams in Node.js.",
+      "upvotes": 13,
+      "downvotes": 3
+    },
+    {
+      "id": 10,
+      "text": "How can you handle errors in Node.js applications?",
+      "upvotes": 10,
+      "downvotes": 2
+    }
+  ]
+}
