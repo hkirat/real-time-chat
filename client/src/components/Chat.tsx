@@ -66,7 +66,7 @@ const MessageBox = () => {
 const Chat = () => {
     return (
         <>
-            <div className="w-full h-full p-1 flex flex-col gap-1">
+            <div className="w-full h-full p-1 pr-0 flex flex-col gap-1">
                 <ChatBubble />
                 <MessageBox />
             </div>
