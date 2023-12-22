@@ -9,5 +9,5 @@ Build a simple chat applications using raw websockets in Node.js that supports t
   - cool_down_time
  - Allow a users to join the room and send messages
  - Allow users to upvote chat messages.
- - If chat messages reach more than 3 upvotes, move them over to a saparate section.
+ - If chat messages reach more than 3 upvotes, move them over to a seperate section.
  - If chat messages reach more than 10 upvotes, alert the admin to answer.
