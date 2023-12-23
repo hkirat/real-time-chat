@@ -5,67 +5,33 @@ import ChatNav from './components/ChatNav'
 import Chats from './components/Chats'
 import InputBox from './components/InputBox'
 import Voting from './components/Voting'
+import { useRecoilValue } from 'recoil';
+import { chatState } from './atoms/chats';
 
 
 const MoreVotes = () => {
-    const [votes, setVotes] = useState(5);
+    const chats = useRecoilValue(chatState);
 
-    const handleUpvote = () => {
-        // do your thing
-    }
-
-    const handleDownvote = () => {
-        // do your thing
-    }
     return (
         <main className='xl:w-[600px] lg:w-[500px] w-[90vw] rounded-lg 
          max-h-[83vh] h-[990px] relative border border-gray-700 bg-[#414040]'>
-            <ChatNav title={`${votes} votes + `} />
+            <ChatNav title="Higher Priority Chats" />
             {
-                votes > 5 && (
-                    <div className='max-h-[630px] bg-[#414040] overflow-y-scroll' style={{ overflowAnchor: 'none' }}>
-                        <Chats
-                            message='hiii'
-                            user='saad'
-                            time='9:56'
-                        />
-                        <Chats
-                            message='hiii'
-                            user='saad'
-                            time='9:56'
-                        />
-                        <Chats
-                            message='hiii'
-                            user='saad'
-                            time='9:56'
-                        />
-                        <Chats
-                            message='hiii'
-                            user='saad'
-                            time='9:56'
-                        />
-                        <Chats
-                            message='hiii'
-                            user='saad'
-                            time='9:56'
-                        />
-                        <Chats
-                            message='hiii'
-                            user='saad'
-                            time='9:56'
-                        />
-                        <Chats
-                            message='hiii'
-                            user='saad'
-                            time='9:56'
-                        />
-                        <Chats
-                            message='hiii'
-                            user='saad'
-                            time='9:56'
-                        />
-                    </div>
-                )
+                <div className='max-h-[630px] bg-[#414040] overflow-y-scroll' style={{ overflowAnchor: 'none' }}>
+                    {chats.map((chat) => {
+                        if (chat.upvotes >= 5) {
+                            return (
+                                <Chats
+                                    id={chat.id}
+                                    message={chat.message}
+                                    upvotes={chat.upvotes}
+                                    downvotes={chat.downvotes}
+                                    time={new Date().toLocaleTimeString()}
+                                />
+                            )
+                        }
+                    })}
+                </div>
             }
 
         </main>
