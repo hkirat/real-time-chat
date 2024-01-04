@@ -8,6 +8,7 @@ type MessagePayload = {
     roomId: string;
     message: string;
     name: string;
+    userId: string;
     upvotes: number;
     chatId: string;
 }

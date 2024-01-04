@@ -29,4 +29,8 @@ export abstract class Store {
 
     }
 
+    dispatch(room: string, chatId: string) {
+
+    }
+
 }

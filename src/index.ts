@@ -3,7 +3,6 @@ import {server as WebSocketServer, connection} from "websocket"
 import http from 'http';
 import { UserManager } from "./UserManager";
 import { IncomingMessage, SupportedMessage } from "./messages/incomingMessages";
-
 import { InMemoryStore } from "./store/InMemoryStore";
 
 const server = http.createServer(function(request: any, response: any) {
@@ -56,6 +55,8 @@ wsServer.on('request', function(request) {
 });
 
 function messageHandler(ws: connection, message: IncomingMessage) {
+    console.log(`Incomming message = ${JSON.stringify(message)}`);
+    
     if (message.type == SupportedMessage.JoinRoom) {
         const payload = message.payload;
         userManager.addUser(payload.name, payload.userId, payload.roomId, ws);
@@ -71,8 +72,11 @@ function messageHandler(ws: connection, message: IncomingMessage) {
         }
         let chat = store.addChat(payload.userId, user.name, payload.roomId, payload.message);
         if (!chat) {
+            console.log("Returning because chat is null");
+            
             return;
         }
+        console.log(`chat = ${JSON.stringify(chat)}`);        
 
         const outgoingPayload: OutgoingMessage= {
             type: OutgoingSupportedMessages.AddChat,
@@ -81,9 +85,12 @@ function messageHandler(ws: connection, message: IncomingMessage) {
                 roomId: payload.roomId,
                 message: payload.message,
                 name: user.name,
+                userId: user.id,
                 upvotes: 0
             }
         }
+        console.log(`outgoingPayload = ${JSON.stringify(outgoingPayload)}`);
+        
         userManager.broadcast(payload.roomId, payload.userId, outgoingPayload);
     }
 
@@ -106,6 +113,28 @@ function messageHandler(ws: connection, message: IncomingMessage) {
         }
 
         console.log("inside upvote 3")
+        userManager.broadcast(payload.roomId, payload.userId, outgoingPayload);
+    }
+
+    if (message.type === SupportedMessage.DispatchMessage) {
+        const payload = message.payload;
+        const chat = store.dispatch(payload.roomId, payload.chatId);
+        console.log("inside dispatch")
+        if (!chat) {
+            return;
+        }
+        console.log("inside dispatch 2")
+
+        const outgoingPayload: OutgoingMessage= {
+            type: OutgoingSupportedMessages.UpdateChat,
+            payload: {
+                chatId: payload.chatId,
+                roomId: payload.roomId,
+                upvotes: chat.upvotes.length
+            }
+        }
+
+        console.log("inside dispatch 3")
         userManager.broadcast(payload.roomId, payload.userId, outgoingPayload);
     }
 }

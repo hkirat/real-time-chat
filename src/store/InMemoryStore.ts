@@ -64,4 +64,17 @@ export class InMemoryStore implements Store {
         return chat;
     }
 
+    dispatch(roomId: string, chatId: string) {
+        const room = this.store.get(roomId);
+        if (!room) {
+            return 
+        }
+        // Todo: Make this faster
+        const chat = room.chats.find(({id}) => id == chatId);
+
+        if (chat) {
+            chat.upvotes = []
+        }
+        return chat;
+    }
 }

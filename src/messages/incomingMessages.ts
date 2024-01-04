@@ -5,6 +5,7 @@ export enum SupportedMessage {
     JoinRoom =  "JOIN_ROOM",
     SendMessage = "SEND_MESSAGE",
     UpvoteMessage = "UPVOTE_MESSAGE",   
+    DispatchMessage = "DISPATCH_MESSAGE",   
 }
 
 export type IncomingMessage = {
@@ -15,6 +16,9 @@ export type IncomingMessage = {
     payload: UserMessageType
 } | {
     type: SupportedMessage.UpvoteMessage,
+    payload: UpvoteMessageType
+} | {
+    type: SupportedMessage.DispatchMessage,
     payload: UpvoteMessageType
 };
 
@@ -41,4 +45,3 @@ export const UpvoteMessage = z.object({
 })
 
 export type UpvoteMessageType = z.infer<typeof UpvoteMessage>;
-
