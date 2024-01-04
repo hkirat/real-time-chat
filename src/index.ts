@@ -3,7 +3,6 @@ import {server as WebSocketServer, connection} from "websocket"
 import http from 'http';
 import { UserManager } from "./UserManager";
 import { IncomingMessage, SupportedMessage } from "./messages/incomingMessages";
-
 import { InMemoryStore } from "./store/InMemoryStore";
 
 const server = http.createServer(function(request: any, response: any) {
@@ -81,9 +80,11 @@ function messageHandler(ws: connection, message: IncomingMessage) {
                 roomId: payload.roomId,
                 message: payload.message,
                 name: user.name,
+                userId: user.id,
                 upvotes: 0
             }
         }
+        
         userManager.broadcast(payload.roomId, payload.userId, outgoingPayload);
     }
 
@@ -106,6 +107,28 @@ function messageHandler(ws: connection, message: IncomingMessage) {
         }
 
         console.log("inside upvote 3")
+        userManager.broadcast(payload.roomId, payload.userId, outgoingPayload);
+    }
+
+    if (message.type === SupportedMessage.DispatchMessage) {
+        const payload = message.payload;
+        const chat = store.dispatch(payload.roomId, payload.chatId);
+        console.log("inside dispatch")
+        if (!chat) {
+            return;
+        }
+        console.log("inside dispatch 2")
+
+        const outgoingPayload: OutgoingMessage= {
+            type: OutgoingSupportedMessages.UpdateChat,
+            payload: {
+                chatId: payload.chatId,
+                roomId: payload.roomId,
+                upvotes: chat.upvotes.length
+            }
+        }
+
+        console.log("inside dispatch 3")
         userManager.broadcast(payload.roomId, payload.userId, outgoingPayload);
     }
 }
